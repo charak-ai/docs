@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Charak — Epic / SMART on FHIR App Documentation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      line-height: 1.6;
+      color: #111;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 32px;
+    }
+    h1, h2, h3 {
+      color: #0b2545;
+    }
+    h1 {
+      margin-bottom: 8px;
+    }
+    p {
+      margin: 10px 0;
+    }
+    ul {
+      margin: 8px 0 16px 24px;
+    }
+    .meta {
+      color: #555;
+      margin-bottom: 24px;
+    }
+    .box {
+      background: #f7fafc;
+      border: 1px solid #e2e8f0;
+      padding: 16px;
+      border-radius: 8px;
+      margin: 16px 0;
+    }
+    .notice {
+      background: #fff8e6;
+      border-left: 4px solid #f6c85f;
+      padding: 12px 16px;
+      margin: 16px 0;
+      border-radius: 4px;
+    }
+    footer {
+      margin-top: 40px;
+      padding-top: 16px;
+      border-top: 1px solid #e6eef8;
+      color: #555;
+      font-size: 14px;
+    }
+    code {
+      background: #f1f5f9;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Charak — Epic / SMART on FHIR App Documentation</h1>
+  <p class="meta">
+    Patient-facing application • Read-only • SMART on FHIR R4
+  </p>
+
+  <h2>1. App Overview</h2>
+  <p>
+    Charak is a patient-facing desktop application that allows individuals to securely access,
+    aggregate, and review their longitudinal medical records across providers.
+    The application is designed to help patients understand their health history,
+    identify trends or inconsistencies, and prepare questions for clinical encounters.
+  </p>
+  <p>
+    Charak is intended for personal use by patients and caregivers and supports
+    care coordination and sense-making. It does not replace clinical care.
+  </p>
+
+  <h2>2. Use of Epic / SMART on FHIR APIs</h2>
+  <p>
+    Charak integrates with Epic-supported electronic health record systems using
+    <strong>SMART App Launch on FHIR R4</strong>.
+  </p>
+  <div class="box">
+    <ul>
+      <li><strong>FHIR version:</strong> R4</li>
+      <li><strong>SMART version:</strong> SMART App Launch v2 (with graceful fallback if required)</li>
+      <li><strong>Access scope:</strong> Patient-scoped, read-only (<code>patient/*.read</code>)</li>
+      <li><strong>Operations used:</strong> FHIR Read and Search</li>
+      <li><strong>Writes to EHR:</strong> None</li>
+    </ul>
+  </div>
+  <p>
+    Charak retrieves only data that already exists in the EHR and does not create,
+    modify, or delete any clinical records.
+  </p>
+
+  <h2>3. Authentication & Authorization</h2>
+  <p>
+    Charak is a <strong>public client</strong> and uses the SMART App Launch
+    <strong>Authorization Code flow with PKCE</strong>.
+  </p>
+  <ul>
+    <li>No client secret is embedded in the application.</li>
+    <li>A loopback redirect URI is used for desktop authentication.</li>
+    <li>User credentials are never stored in plaintext.</li>
+  </ul>
+
+  <h2>4. Data Storage & Security</h2>
+  <p>
+    Charak follows a local-first design. By default, retrieved health records are stored
+    locally on the user’s device in encrypted form.
+  </p>
+  <ul>
+    <li>Encryption at rest and in transit is used.</li>
+    <li>Access tokens are stored securely and scoped to the user’s authorization.</li>
+    <li>Users may disconnect providers and delete locally stored data at any time.</li>
+  </ul>
+
+  <p>
+    Optional cloud-based features (such as AI-assisted summarization) are strictly opt-in
+    and require explicit user consent before any data is shared with external services.
+  </p>
+
+  <h2>5. Use of AI / Automated Processing</h2>
+  <p>
+    Charak may use automated language models to summarize or organize user-provided
+    health records and to help generate questions for discussion with clinicians.
+  </p>
+  <div class="notice">
+    <strong>Important:</strong> AI-generated outputs are informational only and may be incomplete
+    or uncertain. They are always presented with provenance to underlying records.
+  </div>
+
+  <h2>6. Medical Disclaimer</h2>
+  <p>
+    Charak is not a medical device and does not provide diagnosis, treatment
+    recommendations, or clinical decision-making.
+  </p>
+  <p>
+    Users should always consult qualified healthcare professionals for medical advice,
+    diagnosis, or treatment. In case of a medical emergency, contact emergency services immediately.
+  </p>
+
+  <h2>7. Compliance & Intended Use</h2>
+  <p>
+    Charak is intended to support patient access rights under the U.S. ONC Cures Act
+    and similar patient access frameworks. The application is read-only and patient-authorized.
+  </p>
+  <p>
+    Charak does not act on behalf of providers and does not require access to system-level
+    or write-capable APIs.
+  </p>
+
+  <h2>8. Contact Information</h2>
+  <p>
+    For questions related to Epic integration, security, or this documentation:
+  </p>
+  <p>
+    <strong>Charak Support</strong><br />
+    Email: <a href="mailto:support@charak.example">support@charak.example</a>
+  </p>
+
+  <footer>
+    <p>
+      This page is provided for Epic App Orchard and SMART on FHIR review purposes.
+      Information is subject to change as the application evolves.
+    </p>
+  </footer>
+
+</body>
+</html>
